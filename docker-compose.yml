@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+
+  web:
+    build: ./web
+    command: gunicorn myportfolio.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./web:/app
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - web
+    volumes:
+      - ./web/static:/app/static
+
+volumes:
+  static:
