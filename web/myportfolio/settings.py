@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!_7=yw8zv4l8qtdr!c$lw9qju$awnteg-a&9v=chlti-fe89@7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["16.171.153.115","www.ahmetmercan.com.tr","ahmetmercan.com.tr"]
+ALLOWED_HOSTS = ["16.171.153.115", "www.ahmetmercan.com.tr",
+                 "ahmetmercan.com.tr", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -39,8 +40,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'core'
+    'core',
+    'api',
+    
+
+
+    'rest_framework',
+
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,27 +88,26 @@ WSGI_APPLICATION = 'myportfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
-        'HOST': 'db',  # This should match the service name defined in docker-compose.yml
-        'PORT': '5432',  # Default PostgreSQL port
-    }
-}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'mydb',
-#         'USER': 'postgres',
-#         'PASSWORD': '05396602459',
-#         'HOST': 'localhost',  # This should match the service name defined in docker-compose.yml
+#         'USER': 'myuser',
+#         'PASSWORD': 'mypassword',
+#         'HOST': 'db',  # This should match the service name defined in docker-compose.yml
 #         'PORT': '5432',  # Default PostgreSQL port
 #     }
 # }
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': '05396602459',
+        'HOST': 'localhost',  # This should match the service name defined in docker-compose.yml
+        'PORT': '5432',  # Default PostgreSQL port
+    }
+}
 
 
 # Password validation
@@ -139,7 +150,7 @@ print(os.path.join(BASE_DIR))
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 MEDIA_URL = 'media/'
