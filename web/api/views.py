@@ -14,27 +14,34 @@ class ProfileViewset(viewsets.ModelViewSet):
 class ContactViewset(viewsets.ModelViewSet):
     serializer_class = ContactSerializer
     queryset = Contact.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    
 
 class ExperiencesViewset(viewsets.ModelViewSet):
     serializer_class = ExperinceSerializer
     queryset = WorkExperinces.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class ProjectCategoriesViewset(viewsets.ModelViewSet):
     serializer_class =ProjectCategoriesSerializer
     queryset = ProjectCategories.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class ProjectViewset(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     queryset = Projects.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class AbilitiesViewset(viewsets.ModelViewSet):
     serializer_class = AbilitiesSerializer
-    queryset = Projects.objects.all()
+    queryset = Abilities.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     
 class ReferancesViewset(viewsets.ModelViewSet):
     serializer_class = ReferancesSerializer
-    queryset = Projects.objects.all()
+    queryset = Referances.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     

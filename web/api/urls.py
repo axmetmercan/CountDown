@@ -10,13 +10,13 @@ from .views import (ProfileViewset,
                     )
 
 router = DefaultRouter()
-router.register(r'Profile', ProfileViewset, basename="Get Profile Info")
-router.register(r'Contact', ContactViewset, basename="Get Profile Contact")
-router.register(r'Experiences', ExperiencesViewset, basename="Get Profile Experiences")
-router.register(r'Project-categories', ProjectCategoriesViewset, basename="Get Project Categories")
-router.register(r'Projects', ProjectViewset, basename="Get Profile Projects")
-router.register(r'Abilities', AbilitiesViewset, basename="Get Profile Abilities")
-router.register(r'Referances', ReferancesViewset, basename="Get Profile referances")
+router.register(r'profile', ProfileViewset, basename="Get Profile Info")
+router.register(r'contact', ContactViewset, basename="Get Profile Contact")
+router.register(r'experiences', ExperiencesViewset, basename="Get Profile Experiences")
+router.register(r'project-categories', ProjectCategoriesViewset, basename="Get Project Categories")
+router.register(r'projects', ProjectViewset, basename="Get Profile Projects")
+router.register(r'abilities', AbilitiesViewset, basename="Get Profile Abilities")
+router.register(r'referances', ReferancesViewset, basename="Get Profile referances")
 
 
 
