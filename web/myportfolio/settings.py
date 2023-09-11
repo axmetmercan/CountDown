@@ -109,7 +109,7 @@ DATABASES = {
         'NAME': os.environ.get('POSTGRES_DB'),
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_DB'),  # This should match the service name defined in docker-compose.yml
+        'HOST': 'db',  # This should match the service name defined in docker-compose.yml
         'PORT': '5432',  # Default PostgreSQL port
     }
 }

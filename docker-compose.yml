@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   db:
@@ -10,7 +10,6 @@ services:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
 
-
   web:
     build: ./web
     command: gunicorn myportfolio.wsgi:application --bind 0.0.0.0:8000
@@ -18,18 +17,22 @@ services:
       - ./web:/app
     depends_on:
       - db
+    # environment:
+    #   - SECRET_KEY=django-insecure-!_7=yw8zv4l8qtdr!c$lw9qju$awnteg-a&9v=chlti-fe89@7
+    #   - POSTGRES_USER=myuser
+    #   - POSTGRES_PASSWORD=mypassword
+    #   - POSTGRES_DB=mydb
   nginx:
     build: ./nginx
     ports:
-      - "8000:80"
+      - "8080:80"
     depends_on:
       - web
     volumes:
       - ./web/static:/app/static
-
-
+      - ./web/media:/app/media
 
 volumes:
   static:
   pg_data:
-
+  media:

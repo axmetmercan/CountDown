@@ -4,10 +4,10 @@ FROM python:3.9-slim
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-# ENV SECRET_KEY mysecretkey
-# ENV POSTGRES_USER myuser
-# ENV POSTGRES_PASSWORD mypassword
-# ENV POSTGRES_DB mydb
+ENV SECRET_KEY mysecretkey
+ENV POSTGRES_USER myuser
+ENV POSTGRES_PASSWORD mypassword
+ENV POSTGRES_DB mydb
 
 # Set the working directory in the container
 WORKDIR /app
