@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!_7=yw8zv4l8qtdr!c$lw9qju$awnteg-a&9v=chlti-fe89@7'
+print("HElloooooo",os.environ)
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["16.171.153.115", "www.ahmetmercan.com.tr",
                  "ahmetmercan.com.tr", "127.0.0.1", "localhost"]
@@ -53,7 +54,9 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_DOMAIN': 'http://localhost',
+
 }
 
 MIDDLEWARE = [
@@ -73,8 +76,9 @@ ROOT_URLCONF = 'myportfolio.urls'
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:3000",
+    "http://localhost",
+    "http://localhost",
+    "http://localhost",
 ]
 
 TEMPLATES = [
@@ -102,25 +106,14 @@ WSGI_APPLICATION = 'myportfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
-        'HOST': 'db',  # This should match the service name defined in docker-compose.yml
+        'NAME': os.environ.get('POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('POSTGRES_DB'),  # This should match the service name defined in docker-compose.yml
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
 
-
-# DATABASES = {   
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mydb',
-#         'USER': 'postgres',
-#         'PASSWORD': '05396602459',
-#         'HOST': 'localhost',  # This should match the service name defined in docker-compose.yml
-#         'PORT': '5432',  # Default PostgreSQL port
-#     }
-# }
 
 
 # DATABASES = {
@@ -170,11 +163,11 @@ print(os.path.join(BASE_DIR))
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
